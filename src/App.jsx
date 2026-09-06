@@ -368,7 +368,7 @@ function App() {
                         tipo: 'hematologia',
                         fecha: '02/09/2026',
                         folio: 'BC-HEM-02092026-01524',
-                        pdf: '/resultados/hematologia.pdf'
+                        pdf: `${import.meta.env.BASE_URL}resultados/hematologia.pdf`
                       })
                     }
                   >
@@ -415,7 +415,7 @@ function App() {
                         tipo: 'quimica',
                         fecha: '02/09/2026',
                         folio: 'BC-QC-02092026-01837',
-                        pdf: '/resultados/quimica-clinica.pdf'
+                        pdf: `${import.meta.env.BASE_URL}resultados/quimica-clinica.pdf`
                       })
                     }
                   >
@@ -460,7 +460,7 @@ function App() {
                         tipo: 'hormonas',
                         fecha: '02/09/2026',
                         folio: 'BC-HOR-02092026-01091',
-                        pdf: '/resultados/hormonas.pdf'
+                        pdf: `${import.meta.env.BASE_URL}resultados/hormonas.pdf`
                       })
                     }
                   >
