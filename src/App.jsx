@@ -8,11 +8,40 @@ function App() {
   const [pantalla, setPantalla] = useState('inicio')
   const [areaSeleccionada, setAreaSeleccionada] = useState(null)
 
+  const [mostrarRegistro, setMostrarRegistro] = useState(false)
+  const [nombreRegistro, setNombreRegistro] = useState('')
+  const [correoRegistro, setCorreoRegistro] = useState('')
+  const [contrasenaRegistro, setContrasenaRegistro] = useState('')
+  const [rolRegistro, setRolRegistro] = useState('paciente')
+
   const paciente = {
     id: 'FNVO-24042001',
     nombre: 'Fernanda Nataly Vallejo Olmos'
   }
 
+  const registrarUsuario = (event) => {
+    event.preventDefault()
+
+    if (
+      nombreRegistro !== '' &&
+      correoRegistro !== '' &&
+      contrasenaRegistro !== '' &&
+      rolRegistro !== ''
+    ) {
+    alert(
+      `¡Registro realizado correctamente como ${rolRegistro}!`
+    )
+
+    setNombreRegistro('')
+    setCorreoRegistro('')
+    setContrasenaRegistro('')
+    setRolRegistro('paciente')
+    setMostrarRegistro(false)
+    } else {
+    alert('¡No olvides completar todos los campos!')
+    }
+  }
+  
   const iniciarSesion = (event) => {
     event.preventDefault()
 
@@ -36,6 +65,97 @@ function App() {
     setAreaSeleccionada(area)
     setPantalla('detalle')
   }
+
+  if (mostrarRegistro) {
+  return (
+    <div className="login-page">
+      <div className="login-card">
+        <h1>BioCheck</h1>
+
+        <p className="subtitle">
+          Tu salud al alcance de un clic
+        </p>
+
+        <h2>Crear cuenta</h2>
+
+        <form onSubmit={registrarUsuario}>
+          <label>
+            Nombre completo
+          </label>
+
+          <input
+            type="text"
+            placeholder="Ingresa tu nombre completo"
+            value={nombreRegistro}
+            onChange={(event) =>
+              setNombreRegistro(event.target.value)
+            }
+          />
+
+          <label>
+            Correo electrónico
+          </label>
+
+          <input
+            type="email"
+            placeholder="ejemplo@correo.com"
+            value={correoRegistro}
+            onChange={(event) =>
+              setCorreoRegistro(event.target.value)
+            }
+          />
+
+          <label>
+            Contraseña
+          </label>
+
+          <input
+            type="password"
+            placeholder="Crea una contraseña"
+            value={contrasenaRegistro}
+            onChange={(event) =>
+              setContrasenaRegistro(event.target.value)
+            }
+          />
+
+          <label>
+            Tipo de usuario
+          </label>
+
+          <select
+            value={rolRegistro}
+            onChange={(event) =>
+              setRolRegistro(event.target.value)
+            }
+          >
+            <option value="paciente">
+              Paciente
+            </option>
+
+            <option value="medico">
+              Médico
+            </option>
+          </select>
+
+          <div className="botones-registro">
+            <button
+            type="button"
+            className="boton-regresar"
+            onClick={() => setMostrarRegistro(false)}
+            >
+              Regresar al inicio de sesión
+            </button>
+
+            <button type="submit">
+              Crear cuenta
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  )
+}
 
   if (
     sesionIniciada &&
@@ -618,9 +738,20 @@ function App() {
             }
           />
 
-          <button type="submit">
-            Iniciar sesión
-          </button>
+          <div className="botones-login">
+            <button
+            type="button"
+            className="boton-registro"
+            onClick={() => setMostrarRegistro(true)}
+            >
+               Crear cuenta
+            </button>
+
+            <button type="submit">
+              Iniciar sesión
+            </button>
+          </div>
+
         </form>
       </div>
     </div>

@@ -44,15 +44,21 @@ label {
   font-weight: 600;
 }
 
-input {
+input,
+select {
   padding: 12px;
   margin-bottom: 20px;
   border: 1px solid #cbd5e1;
   border-radius: 8px;
   font-size: 16px;
+  background: white;
+  color: #333;
+  box-sizing: border-box;
+  width: 100%;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: none;
   border-color: #1976a8;
 }
@@ -367,4 +373,32 @@ button:disabled {
   .detalle-resultado {
     padding: 22px;
   }
+}
+
+.botones-login {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.botones-login button {
+  flex: 1;
+  margin: 0;
+}
+
+
+.botones-registro {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.botones-registro button {
+  flex: 1;
+  margin: 0;
 }
