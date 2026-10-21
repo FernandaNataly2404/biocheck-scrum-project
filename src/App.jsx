@@ -5,6 +5,20 @@ function App() {
   const [correo, setCorreo] = useState('')
   const [contrasena, setContrasena] = useState('')
   const [sesionIniciada, setSesionIniciada] = useState(false)
+
+  const usuariosPrueba = [
+  {
+    correo: 'paciente@biocheck.com',
+    contrasena: 'Paciente123',
+    rol: 'paciente'
+  },
+  {
+    correo: 'medico@biocheck.com',
+    contrasena: 'Medico123',
+    rol: 'medico'
+  }
+]
+
   const [pantalla, setPantalla] = useState('inicio')
   const [areaSeleccionada, setAreaSeleccionada] = useState(null)
 
@@ -43,14 +57,25 @@ function App() {
   }
   
   const iniciarSesion = (event) => {
-    event.preventDefault()
+  event.preventDefault()
 
-    if (correo !== '' && contrasena !== '') {
-      setSesionIniciada(true)
-      setPantalla('inicio')
-    } else {
-      alert('¡No olvides completar todos los campos!')
-    }
+  if (correo.trim() === '' || contrasena === '') {
+    alert('¡No olvides completar todos los campos!')
+    return
+  }
+
+  const usuarioEncontrado = usuariosPrueba.find(
+    (usuario) =>
+      usuario.correo === correo.trim() &&
+      usuario.contrasena === contrasena
+  )
+
+  if (usuarioEncontrado) {
+    setSesionIniciada(true)
+    setPantalla('inicio')
+  } else {
+    alert('Correo electrónico o contraseña incorrectos.')
+  }
   }
 
   const cerrarSesion = () => {
