@@ -402,3 +402,144 @@ button:disabled {
   flex: 1;
   margin: 0;
 }
+
+.historial-estudio {
+  background: white;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+}
+
+.historial-fechas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.historial-fecha {
+  background: #f4f8fb;
+  border: 1px solid #dceaf2;
+  border-radius: 10px;
+  padding: 18px 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: default;
+}
+
+.historial-fecha:hover {
+  background-color: #e0f0fa;
+  transform: scale(1.02);
+  box-shadow: 0 6px 18px rgba(25, 118, 168, 0.15);
+}
+
+.historial-fecha p {
+  color: #555;
+  margin: 7px 0;
+}
+
+.historial-acciones {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.historial-grafica {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #dceaf2;
+}
+
+@media (max-width: 650px) {
+  .historial-fecha {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .historial-acciones {
+    align-items: flex-start;
+  }
+
+  .historial-grafica {
+    justify-content: flex-start;
+  }
+
+  .historial-desplegable {
+    padding: 18px;
+  }
+
+  .historial-contenido {
+    padding: 15px;
+  }
+
+  .historial-desplegable strong {
+    font-size: 17px;
+  }
+}
+
+.historial-contenido {
+  padding: 20px 25px 25px;
+  border-top: 1px solid #dceaf2;
+}
+
+.historial-estudio .historial-desplegable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  padding: 22px 25px;
+
+  background: #ffffff;
+  color: #1976a8;
+
+  border: none;
+  border-radius: 0;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition: background-color 0.3s ease;
+}
+
+.historial-estudio .historial-desplegable:hover {
+  background: #e0f0fa;
+}
+
+.historial-desplegable span:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.historial-desplegable strong {
+  font-size: 20px;
+  color: #1976a8;
+}
+
+.historial-desplegable small {
+  font-size: 13px;
+  color: #777;
+}
+
+.historial-flecha {
+  font-size: 18px;
+  color: #1976a8;
+  margin-left: 15px;
+}
+
+.historial-desplegable:focus-visible {
+  outline: 2px solid #1976a8;
+  outline-offset: -3px;
+}

@@ -437,6 +437,207 @@ function App() {
     )
   }
 
+  const [estudiosAbiertos, setEstudiosAbiertos] = useState({})
+
+  if (sesionIniciada && pantalla === 'historial') {
+  const historial = [
+    {
+      area: 'Hematología',
+      estudios: [
+        {
+          nombre: 'Biometría Hemática',
+          registros: [
+            {
+              fecha: '10/06/2026',
+              folio: 'BC-HEM-10062026-01201'
+            },
+            {
+              fecha: '20/04/2026',
+              folio: 'BC-HEM-20042026-01102'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      area: 'Química Clínica',
+      estudios: [
+        {
+          nombre: 'Química Sanguínea',
+          registros: [
+            {
+              fecha: '15/08/2026',
+              folio: 'BC-QC-15082026-01321'
+            },
+            {
+              fecha: '10/06/2026',
+              folio: 'BC-QC-10062026-01215'
+            },
+            {
+              fecha: '20/04/2026',
+              folio: 'BC-QC-20042026-01120'
+            }
+          ]
+        },
+        {
+          nombre: 'Perfil de Lípidos',
+          registros: [
+            {
+              fecha: '15/08/2026',
+              folio: 'BC-QC-15082026-01321'
+            },
+            {
+              fecha: '10/06/2026',
+              folio: 'BC-QC-10062026-01215'
+            }
+          ]
+        }
+      ]
+    },
+    {
+      area: 'Hormonas',
+      estudios: [
+        {
+          nombre: 'Perfil Tiroideo',
+          registros: [
+            {
+              fecha: '20/04/2026',
+              folio: 'BC-HOR-20042026-01421'
+            }
+          ]
+        }
+      ]
+    }
+  ]
+
+  return (
+    <div className="dashboard-page">
+      <header className="dashboard-header">
+        <div>
+          <h1>BioCheck</h1>
+          <p>Laboratorio de Análisis Clínicos</p>
+        </div>
+
+        <button
+          className="cerrar-sesion"
+          onClick={cerrarSesion}
+        >
+          Cerrar sesión
+        </button>
+      </header>
+
+      <main className="dashboard-content">
+        <button
+          className="boton-regresar"
+          onClick={() => setPantalla('inicio')}
+        >
+          Regresar al inicio
+        </button>
+
+        <section className="bienvenida">
+          <h2>📊 Historial de resultados</h2>
+          <p>
+            Consulta los resultados de tus estudios anteriores.
+          </p>
+        </section>
+
+        <section className="datos-paciente">
+          <p>
+            <strong>ID del paciente:</strong> {paciente.id}
+          </p>
+          <p>
+            <strong>Paciente:</strong> {paciente.nombre}
+          </p>
+        </section>
+
+        <section className="lista-resultados">
+          {historial.map((grupo) => (
+            <div className="area-resultados" key={grupo.area}>
+              <h3 className="titulo-area">{grupo.area}</h3>
+
+              {grupo.estudios.map((estudio) => {
+                const claveEstudio = `${grupo.area}-${estudio.nombre}`
+                const abierto = estudiosAbiertos[claveEstudio] || false
+
+                return (
+                <div className="historial-estudio" key={claveEstudio}>
+                  <button
+                    type="button"
+                    className="historial-desplegable"
+                    aria-expanded={abierto}
+                    onClick={() =>
+                      setEstudiosAbiertos((anteriores) => ({
+                      ...anteriores,
+                      [claveEstudio]: !anteriores[claveEstudio]
+                    }))
+                    }
+                    >
+                      <span>
+                          <strong>{estudio.nombre}</strong>
+                        <small>
+                          {estudio.registros.length} registros anteriores
+                        </small>
+                      </span>
+
+                      <span className="historial-flecha">
+                          {abierto ? '▲' : '▼'}
+                      </span>
+                  </button>
+
+                {abierto && (
+                <div className="historial-contenido">
+                <div className="historial-fechas">
+                  {estudio.registros.map((registro) => (
+                    <div
+                      className="historial-fecha"
+                      key={registro.folio}
+                    >
+                    <div>
+                      <p>
+                        <strong>Fecha:</strong> {registro.fecha}
+                      </p>
+                      <p>
+                        <strong>Folio:</strong> {registro.folio}
+                      </p>
+                    </div>
+
+                    <div className="historial-acciones">
+                      <span className="estado disponible">
+                        Liberado
+                      </span>
+
+                    <button type="button" disabled>
+                      Ver resultados
+                    </button>
+                    </div>
+                    </div>
+                  ))}
+                </div>
+
+                  <div className="historial-grafica">
+                     <button type="button" disabled>
+                      📋 Ver tabla de evolución
+                    </button>
+
+                    <button type="button" disabled>
+                      📈 Ver gráfica de evolución
+                    </button>
+                  </div>
+                
+                </div>
+                )}
+              </div>
+              )
+            })}
+              
+            </div>
+          ))}
+        </section>
+      </main>
+    </div>
+  )
+  } 
+
   if (sesionIniciada && pantalla === 'resultados') {
     return (
       <div className="dashboard-page">
@@ -703,7 +904,7 @@ function App() {
                 Consulta los resultados de tus estudios anteriores.
               </p>
 
-              <button>
+              <button onClick={() => setPantalla('historial')}>
                 Ver historial
               </button>
             </div>
