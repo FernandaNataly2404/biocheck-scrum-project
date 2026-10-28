@@ -21,6 +21,7 @@ function App() {
 
   const [pantalla, setPantalla] = useState('inicio')
   const [areaSeleccionada, setAreaSeleccionada] = useState(null)
+  const [estudiosAbiertos, setEstudiosAbiertos] = useState({})
 
   const [mostrarRegistro, setMostrarRegistro] = useState(false)
   const [nombreRegistro, setNombreRegistro] = useState('')
@@ -406,7 +407,7 @@ function App() {
                   <span>Resultado</span>
                   <span>Unidades</span>
                   <span>Valor de referencia</span>
-                </div>
+                </div>.historial-grafica
 
                 <div className="tabla-fila">
                   <span>TSH</span>
@@ -436,8 +437,6 @@ function App() {
       </div>
     )
   }
-
-  const [estudiosAbiertos, setEstudiosAbiertos] = useState({})
 
   if (sesionIniciada && pantalla === 'historial') {
   const historial = [
